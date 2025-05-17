@@ -1,0 +1,46 @@
+def extend_Gcd(a,b):
+    if b==0:
+        d=a
+        x,y=1,0
+        return d,x,y
+    x2,x1=1,0
+    y2,y1=0,1
+    while b>0:
+        q=a//b
+        r=a%b
+        x=x2-q*x1
+        y=y2-q*y1
+        a=b
+        b=r
+        x2=x1
+        x1=x
+        y2=y1
+        y1=y
+    return a,x2,y2
+
+def mod_in(e,phi):
+    # tìm nghịch đảo của e vơi e*x=1 mode phi 
+    gcd,x,y= extend_Gcd(e,phi)
+    if gcd !=1:
+        print('KHONG TIM DC MODE NGHICH DAO')
+        return
+    return x% phi
+
+def creat_key(p,q,e):
+    n=p*q
+    phi=(p-1)*(q-1)
+    # hehe khúc này tìm nghịch đảo nè d la nghich dao nhe
+    d= mod_in(e,phi)
+    return n,d
+
+if __name__=='__main__':
+    p=int(input("nhap so p: "))
+    q=int(input("nhap q: "))
+    e=int(input('nhap so mu cong khai e: '))
+    if p==q:
+        print('KHONG HOP LE')
+    #sinh ra khoa ne hehe
+    n,d=creat_key(p,q,e)
+    print('Khoa cong khai (n,e):',n,e)
+    print('Khoa bi mat(n,d):',n,d)
+    
