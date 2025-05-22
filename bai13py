@@ -1,0 +1,58 @@
+def extend_gcd(a,b):
+    if b==0:
+        return a,1,0
+    else:
+        d,x1,y1=extend_gcd(b,a%b)
+        x,y=y1,x1-(a//b)*y1
+        return d,x,y
+    
+def mod_in(a,p):
+    d,x,_=extend_gcd(a%p,p)
+    if d!=1:
+        raise ValueError('KHONG CO NGHICH DAO')
+    return x%p
+
+def lam(P,Q,a,p):
+    if P==(0,0):
+        return Q
+    if Q==(0,0):
+        return P
+    x1,y1=P
+    x2,y2=Q
+
+    if x1==x2 and (y1+y2)%p==0:
+        return (0,0)
+    if x1==x2 and y1==y2:
+        inv=mod_in(2*y1%p,p)
+        gramma=((3*x1*x1+a)%p)*inv%p
+    else:
+        invy=mod_in((x2-x1)%p,p)
+        gramma=((y2-y1)%p)*invy%p
+    x3=(gramma*gramma-x1-x2)%p
+    y3=(gramma*(x1-x3)-y1)%p
+    return (x3,y3)
+
+def nhanlap(n,P,a,p):
+    result=(0,0)
+    attend=P
+
+    while n>0:
+        if n%2==1:
+            result=lam(result,attend,a,p)
+        attend=lam(attend,attend,a,p)
+        n//=2
+    return result
+
+def main():
+    p=int(input('Nhap p: '))
+    a=int(input('Nhap a: '))
+    b=int(input('Nhap b: '))
+    x,y=map(int,input('Nhap x,y: ').split())
+    nA=int(input('Nhap khoa rieng nA: '))
+
+    G=(x,y)
+    PA=nhanlap(nA,G,a,p)
+    print(PA[0],PA[1])
+
+if __name__=='__main__':
+    main()
