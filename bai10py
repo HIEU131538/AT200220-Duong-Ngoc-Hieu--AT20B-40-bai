@@ -1,0 +1,49 @@
+def extend_gcd(a,b):
+    if b==0:
+        d=a
+        x,y=1,0
+        return d,x,y
+    x2,x1=1,0
+    y2,y1=0,1
+    while b>0:
+        q=a//b
+        r=a%b
+        x=x2-q*x1
+        y=y2-q*y1
+        a=b
+        b=r
+        x2=x1
+        x1=x
+        y2=y1
+        y1=y
+    return a,x2,y2
+
+def mod_in(a,m):
+    g,x,_=extend_gcd(a,m)
+    if g !=1:
+        return None
+    else:
+        return x%m
+def PhanduTH(arr):
+    N=1
+    for _,ni in arr:
+        N*=ni
+    
+    x=0
+    for ai,ni in arr:
+        Ni=N//ni
+        Mi=mod_in(Ni,ni)
+        if Mi is None:
+            return 'NOT FOUND'
+        x+= ai*Ni*Mi
+    return x%N
+
+if __name__=='__main__':
+    k=int(input('Nhap k: '))
+    arr=[]
+    for _ in range(k):
+        ai,ni= map(int,input().split())
+        arr.append((ai,ni))
+
+    kq=PhanduTH(arr)
+    print(kq)
