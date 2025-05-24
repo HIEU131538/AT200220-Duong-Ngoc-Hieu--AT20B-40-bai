@@ -1,0 +1,25 @@
+def buid_last(pattern):
+    last={}
+    for i in range(len(pattern)):
+        last[pattern[i]]=i
+    return last
+
+def BOYER_MOORE(text,pattern):
+    m=len(pattern)
+    n=len(text)
+    last=buid_last(pattern)
+    position=[]
+    i=0
+    while i<=n-m:
+        j=m-1
+        while j>=0 and pattern[j]==text[i+j]:
+            j-=1
+
+        if j<0:
+            position.append(i)
+            i+=1
+        else:
+            lo=last.get(text[i+j],-1)
+            shift=m-min(j,1+lo)
+            i+=shift
+    return position
