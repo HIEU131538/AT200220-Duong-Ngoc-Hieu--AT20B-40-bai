@@ -1,0 +1,44 @@
+def build_last(pattern):
+    last={}
+    for i in range(len(pattern)):
+        last[pattern[i]]=i
+    return last
+
+def BOYER_MOORE(text,pattern):
+    last=build_last(pattern)
+    n=len(text)
+    m=len(pattern)
+    i=0
+    
+    while i<=n-m:
+        j=m-1
+        while j>=0 and pattern[j]==text[i+j]:
+            j-=1
+        if j<0:
+            return True
+        else:
+            lot=last.get(text[i+j],-1)
+            shift=m-min(lot+1,j)
+            i+=shift
+    return False
+
+def main():
+    A=input('Nhap A: ')
+    B=input('Nhap B: ')
+    A_tmp=A
+    cnt=1
+    while len(A_tmp)<len(B):
+        A_tmp+= A
+        cnt+=1
+    if BOYER_MOORE(A_tmp,B):
+        print(cnt)
+        return
+    A_tmp+=A
+    if BOYER_MOORE(A_tmp,B):
+        cnt+=1
+        print(cnt)
+        return
+    print(-1)
+
+main()
+
