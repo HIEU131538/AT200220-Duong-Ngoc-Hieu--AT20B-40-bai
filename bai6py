@@ -1,0 +1,45 @@
+def nt(n):
+    if n<2:
+        return False
+    N=int(n**0.5)
+    for i in range(2,N+1):
+        if n%i==0:
+            return False
+    return 1
+
+def timORD(a):
+    if nt(a):
+        return a-1
+    tmp=[]
+    index=0
+    check=a
+    for i in range(2,a):
+        if a%i==0:
+            tmp.append(i)
+            
+            while a%i==0:
+                a//=i
+    
+    for i in range(index):
+        check*=(1-1/tmp[i])
+    return check
+
+def main():
+    n=int(input('Nhap n: '))
+    a=int(input("Nhap a: "))
+    b=int(input('Nhap b: '))
+    kq=0
+    m=int(timORD(n)**0.5)
+    arrj=[]
+    arri=[]
+    for i in range(m):
+        arrj.append(pow(a,i,n))
+        arri.append(b*pow(a,-m*i,n)%n)
+    for i in range(m):
+        for j in range(m):
+            if arri[i]==arrj[j]:
+                kq=m*i+j
+    print(kq)
+
+if __name__=='__main__':
+    main()
