@@ -1,0 +1,28 @@
+def mahoa(chuoi):
+    bang_anh_xa={}
+    cautruc=[]
+    ma_hien_tai=0
+
+    for ky_tu in chuoi:
+        if ky_tu not in bang_anh_xa:
+            bang_anh_xa[ky_tu]=ma_hien_tai
+            ma_hien_tai+=1
+        cautruc.append(bang_anh_xa[ky_tu])
+    return cautruc
+
+def main():
+    n=int(input('nhap so chuoi: '))
+    danhsach={}
+    for i in range(n):
+        danhsach[i]=input('nhap chuoi: ')
+    P=input('Nhap chuoi mang di so sanh: ')
+    MAU=mahoa(P)
+    ketqua=[]
+    for i in range(len(danhsach)):
+        if len(danhsach[i]) != len(P):
+            continue
+        if mahoa(danhsach[i])==MAU:
+            ketqua.append(danhsach[i])
+    print(ketqua)
+
+main()
