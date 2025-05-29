@@ -1,0 +1,18 @@
+import math
+
+def sang(L,R):
+    prime=[1]*(R-L+1)
+
+    for i in range(2,int(math.sqrt(R))+1):
+        start=max(i*i,((L+i-1)//i)*i)
+        for j in range(start,R+1,i):
+            prime[j-L]=0
+    
+
+    for i in range(max(2,L),R+1):
+        if prime[i-L]:
+            print(i,end=' ')
+
+L=int(input('nhap l: '))
+R=int(input('nhap r: '))
+sang(L,R)
