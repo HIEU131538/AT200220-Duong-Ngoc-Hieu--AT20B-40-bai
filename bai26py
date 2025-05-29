@@ -1,0 +1,22 @@
+def bang(k,p,Phantu):
+    if len(p)<k:
+        return 0
+    bangss={}
+    bangss=p[:k]
+    cnt=0
+    for x in range(len(Phantu)):
+        if len(Phantu[x])>=k and Phantu[x][:k]==bangss: 
+            cnt+=1
+    return cnt
+
+
+def main():
+    k=int(input('so_ki_tu_tiento: '))
+    n=int(input('so phan tu: '))
+    Phantu={}
+    for i in range(n):
+        Phantu[i]=input('Nhap chuoi ki tu: ')
+    p=input('mau: ')
+    kq=bang(k,p,Phantu)
+    print(kq)
+main()
