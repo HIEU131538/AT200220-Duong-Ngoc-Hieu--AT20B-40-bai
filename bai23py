@@ -1,0 +1,41 @@
+def build_last(pattern):
+    last={}
+    for i in range(len(pattern)):
+        last[pattern[i]]=i
+    return last
+
+def BOYER_MOORE(text,pattern):
+    n=len(text)
+    m=len(pattern)
+    last=build_last(pattern)
+    i=0
+    cnt=0
+    while i<=n-m:
+        j=m-1
+        while j>=0 and pattern[j]==text[i+j]:
+            j-=1
+        if j<0:
+            cnt+=1
+            i+=m
+        else:
+            lot=last.get(text[i+j],-1)
+            shift=m-min(j,1+lot)
+            i+=shift
+    return cnt
+
+def thuchien(text):
+    cnt=0
+    max_0check=len(text)-2
+    for i in range(1,max_0check+1):
+        pattern='1'+'0'*i+'1'
+        if len(pattern)>len(text):
+            break
+        cnt+=BOYER_MOORE(text,pattern)
+    return cnt
+
+def main():
+    n=(input('NHAP n: '))
+    h=thuchien(n)
+    print(h)
+
+main()
