@@ -1,0 +1,33 @@
+def build_last(pattern):
+    last={}
+    for i in range(len(pattern)):
+        last[pattern[i]]=i
+    return last
+
+def BYER_MOORE(text,pattern):
+    n=len(text)
+    m=len(pattern)
+    last=build_last(pattern)
+    i=0
+    kq=[]
+    while i<=n-m:
+        j=m-1
+        while j>=0 and pattern[j]==text[i+j]:
+            j-=1
+        if j<0:
+            kq.append(i)
+            i+=1
+        else:
+            lot=last.get(text[i+j],-1)
+            shift=m-min(j,lot+1)
+            i+=shift
+    return kq
+
+X=input('Nhap text: ')
+Y=input('Nhap pattren: ')
+a=BYER_MOORE(X,Y)
+if a:
+    print(a[-1]+1)
+else :
+    print(-1)
+
