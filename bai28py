@@ -1,0 +1,25 @@
+def nguyen_am(kitu):
+    return kitu in 'ueoai'
+
+def main():
+    text=input('Nhap chuoi: ')
+    cnt_nguyenam=0
+    cnt_phuam=0
+    for i in text:
+        if i=="?":
+            cnt_nguyenam+=1
+            cnt_phuam+=1
+        elif nguyen_am(i):
+            cnt_nguyenam+=1
+            cnt_phuam=0
+        else:
+            cnt_phuam+=1
+            cnt_nguyenam=0
+        if cnt_nguyenam>5 or cnt_phuam>3:
+            print('BAD')
+            return 
+    
+    print("GOOD")
+    
+main()
+
