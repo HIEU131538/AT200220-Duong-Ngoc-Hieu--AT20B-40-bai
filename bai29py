@@ -1,0 +1,55 @@
+def build_failure(pattern):
+    m=len(pattern)
+    F=[-1]*m
+    for j in range(1,m):
+        for k in range(j-1,-1,-1):
+            if pattern[:k]==pattern[j-k:j]:
+                F[j]=k
+                break
+    return F
+
+def KMP(text,pattern):
+    n=len(text)
+    m=len(pattern)
+    position=[]
+    if m==0:
+        return position
+    F=build_failure(pattern)
+    i=0
+    j=0
+    while i<=n-m:
+        
+        while j<m and i+j<n and text[i+j]==pattern[j]:
+            j+=1
+        if j==m:
+            position.append(i)
+            i=i+m
+            j=0
+            
+        else:
+            if j==0:
+                i+=1
+            else:
+                i=i+j-F[j-1]
+                j=max(F[j-1],0)
+    return position
+
+def xoa(text,pattern):
+    position=KMP(text,pattern)
+    if not position:
+        return text
+    result=[]
+    left=0
+    for pos in position:
+        result.append(text[left:pos])
+        left=pos+len(pattern)
+
+    result.append(text[left:])
+    return ''.join(result)
+
+text=input('Nhap text: ')
+pattern=input('Nhap pattern: ')
+kq=xoa(text,pattern)
+print(kq)
+
+
