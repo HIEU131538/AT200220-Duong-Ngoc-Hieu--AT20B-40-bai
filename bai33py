@@ -1,0 +1,19 @@
+from collections import Counter
+
+def check(text,pattern):
+    m=len(pattern)
+    n=len(text)
+    cnt=Counter(pattern)
+    kq=[]
+
+    for i in range(n-m+1):
+        position= text[i:i+m]
+        if Counter(position)==cnt:
+            kq.append(i)
+    return kq
+
+text=input('Nhap text: ')
+pattern=input('Nhap pattern: ')
+vi_tri=check(text,pattern)
+vi_tri=' '.join(map(str,vi_tri))
+print(vi_tri)
