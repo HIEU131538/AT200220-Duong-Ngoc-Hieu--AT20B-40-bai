@@ -1,0 +1,11 @@
+from collections import defaultdict
+text=input("Nhap text: ")
+cnt=0
+
+bang_tan_suat=defaultdict(int)
+for i in text:
+    bang_tan_suat[i]+=1
+
+for i in bang_tan_suat.values():
+    cnt+=i*(i+1)//2
+print(cnt)
