@@ -1,0 +1,19 @@
+def tim_kiem(tu,danh_sach_tu):
+    for i in range(1,len(tu)+1):
+        tien_to=tu[:i]
+        trung =False
+        for tu_khac in danh_sach_tu:
+            if tu_khac==tu:
+                continue
+            if tu_khac.startswith(tien_to):
+                trung=True
+                break
+        if not trung:
+            return tien_to
+    return tu
+
+n=int(input('Nhap so luong tu: '))
+ds_tu=[input().strip() for _ in range(n)]
+
+kq=[tim_kiem(tu,ds_tu) for tu in ds_tu]
+print(' '.join(kq))
