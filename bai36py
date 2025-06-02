@@ -1,0 +1,18 @@
+def khop_mau(truy_van,mau):
+    i=0
+    for ky_tu in truy_van:
+        if i<len(mau) and ky_tu==mau[i]:
+            i+=1
+        elif ky_tu.isupper():
+            return False
+    return i==len(mau)
+
+n=int(input('Nhap so luong: '))
+dstruy_van=[input().strip() for _ in range(n)]
+mau=input('Nhap mau: ').strip()
+
+for truy_van in dstruy_van:
+    if khop_mau(truy_van,mau):
+        print('true')
+    else:
+        print('false')
