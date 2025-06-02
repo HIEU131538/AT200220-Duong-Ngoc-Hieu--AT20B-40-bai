@@ -1,0 +1,9 @@
+s=input('Nhap chuoi: ')
+goal=input('Nhap goal: ')
+
+def dich_vong(s,goal):
+    if len(s)!=len(goal):
+        return False
+    return goal in (s+s)
+kq=dich_vong(s,goal)
+print(str(kq).lower())
