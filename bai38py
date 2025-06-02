@@ -1,0 +1,13 @@
+def tim_k(chuoi,tu):
+    k=0
+    lap=tu
+    while lap in chuoi:
+        k+=1
+        lap+=tu
+    return k
+
+chuoi=input('Nhap chuoi: ').strip()
+tu=input('Nhap tu: ').strip()
+
+k_max=tim_k(chuoi,tu)
+print(k_max)
