@@ -1,0 +1,11 @@
+text=input('Nhap text: ').strip()
+pattern=input('Nhap pattern: ').strip()
+
+ds_tu=text.split()
+
+for vi_tri,tu in enumerate(ds_tu,start=1):
+    if tu.startswith(pattern):
+        print(vi_tri)
+        break
+else:
+    print(-1)
