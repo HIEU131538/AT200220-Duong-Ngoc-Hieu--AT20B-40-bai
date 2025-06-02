@@ -1,0 +1,35 @@
+def danh_dau(text,ds_text):
+    n=len(text)
+    boi_dam=[False]*n
+
+    for i in ds_text:
+        bat_dau=0
+        while bat_dau<= n- len(i):
+            position=text.find(i,bat_dau)
+            if position==-1:
+                break
+            for j in range(position,position+len(i)):
+                boi_dam[j]=True
+            bat_dau=position+1
+
+    ket_qua=""
+    i=0
+    while i<n:
+        if boi_dam[i]:
+            ket_qua+="<b>"
+            while i<n and boi_dam[i]:
+                ket_qua+=text[i]
+                i+=1
+            ket_qua+="</b>"
+        else:
+            ket_qua+= text[i]
+            i+=1
+    return ket_qua
+
+text=input('Nhap text: ')
+so_tu=int(input('so tu: '))
+ds_text=[input().strip() for _ in range(so_tu)]
+
+
+kq=danh_dau(text,ds_text)
+print(kq)
