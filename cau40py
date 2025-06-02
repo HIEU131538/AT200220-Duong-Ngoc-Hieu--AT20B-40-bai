@@ -1,0 +1,17 @@
+n=int(input('Nhap so luong chuoi: '))
+
+ds_chuoi=[input().strip() for _ in range(n)]
+kq=[]
+
+for i in range(n):
+    tu_dang_xet=ds_chuoi[i]
+    for j in range(n):
+        if i!=j:
+            if tu_dang_xet in ds_chuoi[j]:
+                kq.append(tu_dang_xet)
+                break
+
+if kq:
+    print(' '.join(kq))
+else:
+    print('None')
