@@ -1,0 +1,35 @@
+def so_khop_wildcard(van_ban, mau):
+    n = len(van_ban)
+    m = len(mau)
+
+    # dp[i][j] là True nếu van_ban[0..i-1] khớp với mau[0..j-1]
+       dp = [[False] * (m + 1) for _ in range(n + 1)]
+    dp[0][0] = True  #Chuỗi rỗng khớp với nhau
+
+    # Xử lý khi chuỗi văn bản rỗng và mẫu chứa toàn '*'
+    for j in range(1, m + 1):
+        if mau[j - 1] == '*':
+            dp[0][j] = dp[0][j - 1]
+
+    # Bắt đầu so khớp từng ký tự
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            if mau[j - 1] == van_ban[i - 1] or mau[j - 1] == '?':
+                dp[i][j] = dp[i - 1][j - 1]
+            elif mau[j - 1] == '*':
+                # '*' khớp với 0 ký tự (dp[i][j-1]) hoặc ít nhất 1 ký tự (dp[i-1][j])
+                dp[i][j] = dp[i][j - 1] or dp[i - 1][j]
+            else:
+                dp[i][j] = False
+
+    return dp[n][m]
+
+
+S = input("Nhập chuỗi văn bản S: ")
+P = input("Nhập chuỗi mẫu P (có thể chứa ? hoặc *): ")
+
+
+if so_khop_wildcard(S, P):
+    print("true")
+else:
+    print("false")
