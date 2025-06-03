@@ -1,0 +1,37 @@
+def extend_Gcd(a,b):
+    if b==0:
+        d=a
+        x,y=1,0
+        return d,x,y
+    x2,x1=1,0
+    y2,y1=0,1
+    while b>0:
+        q=a//b
+        r=a%b
+        x=x2-q*x1
+        y=y2-q*y1
+        a=b
+        b=r
+        x2=x1
+        x1=x
+        y2=y1
+        y1=y
+    return a,x2,y2
+
+def mod_in(e,phi):
+    # tìm nghịch đảo của e vơi e*x=1 mode phi 
+    gcd,x,y= extend_Gcd(e,phi)
+    if gcd !=1:
+        print('KHONG TIM DC MODE NGHICH DAO')
+        return
+    return x% phi
+
+p=int(input('Nhap p: '))
+alpha=int(input('Nhap alpha: '))
+a=int(input('Nhap a: '))
+k=int(input('Nhap k: '))
+x=int(input('Nhap x: '))
+beta=(alpha**a)%p
+gamma=(alpha**k)%p
+delta=((x-a*gamma)*mod_in(k,p-1))%(p-1)
+print(f"{gamma} {delta}")
