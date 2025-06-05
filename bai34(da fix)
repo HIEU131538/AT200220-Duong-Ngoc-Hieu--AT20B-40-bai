@@ -1,0 +1,41 @@
+def bat_dau_bang(xau, tien_to):
+    # Hàm tự viết thay cho startswith
+    if len(tien_to) > len(xau):
+        return False
+    for i in range(len(tien_to)):
+        if xau[i] != tien_to[i]:
+            return False
+    return True
+
+def tim_kiem(tu, danh_sach_tu):
+    for i in range(1, len(tu)+1):
+        # Tạo tiền tố thủ công
+        tien_to = ""
+        for j in range(i):
+            tien_to += tu[j]
+
+        trung = False
+        for tu_khac in danh_sach_tu:
+            if tu_khac == tu:
+                continue
+            if bat_dau_bang(tu_khac, tien_to):
+                trung = True
+                break
+
+        if not trung:
+            return tien_to
+    return tu  # Nếu không có tiền tố nào khác biệt thì trả nguyên từ
+
+# Nhập dữ liệu
+n = int(input("Nhap so luong tu: "))
+ds_tu = []
+for _ in range(n):
+    tu = input().strip()
+    ds_tu.append(tu)
+
+# Xử lý và in kết quả
+kq = []
+for i in range(n):
+    kq.append(tim_kiem(ds_tu[i], ds_tu))
+
+print(' '.join(kq))
