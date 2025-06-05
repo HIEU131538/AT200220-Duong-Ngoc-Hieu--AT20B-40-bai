@@ -1,0 +1,34 @@
+text = input('Nhap text: ').strip()
+pattern = input('Nhap pattern: ').strip()
+
+# Tách từ thủ công
+ds_tu = []
+tu = ""
+for c in text:
+    if c != ' ':
+        tu += c
+    else:
+        if tu != "":
+            ds_tu.append(tu)
+            tu = ""
+# Thêm từ cuối nếu có
+if tu != "":
+    ds_tu.append(tu)
+
+# So sánh bắt đầu bằng pattern thủ công
+tim_thay = False
+for vi_tri in range(len(ds_tu)):
+    tu = ds_tu[vi_tri]
+    if len(tu) >= len(pattern):
+        giong = True
+        for i in range(len(pattern)):
+            if tu[i] != pattern[i]:
+                giong = False
+                break
+        if giong:
+            print(vi_tri + 1)  # đánh số từ 1
+            tim_thay = True
+            break
+
+if not tim_thay:
+    print(-1)
