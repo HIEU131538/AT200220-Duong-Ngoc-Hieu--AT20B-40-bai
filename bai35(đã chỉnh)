@@ -1,0 +1,62 @@
+def do_dai(xau):
+    dem = 0
+    for _ in xau:
+        dem += 1
+    return dem
+
+def so_sanh_tu(text, vi_tri_bat_dau, pattern):
+    i = 0
+    while i < do_dai(pattern):
+        if vi_tri_bat_dau + i >= do_dai(text):
+            return False
+        if text[vi_tri_bat_dau + i] != pattern[i]:
+            return False
+        i += 1
+    return True
+
+def danh_dau(text, ds_text):
+    n = do_dai(text)
+    boi_dam = [False] * n
+
+    for i in ds_text:
+        bat_dau = 0
+        while bat_dau <= n - do_dai(i):
+            # tự viết hàm tìm vị trí xuất hiện đầu tiên từ bat_dau
+            position = -1
+            for j in range(bat_dau, n - do_dai(i) + 1):
+                if so_sanh_tu(text, j, i):
+                    position = j
+                    break
+            if position == -1:
+                break
+            for j in range(position, position + do_dai(i)):
+                boi_dam[j] = True
+            bat_dau = position + 1
+
+    ket_qua = ""
+    i = 0
+    while i < n:
+        if boi_dam[i]:
+            ket_qua += "<b>"
+            while i < n and boi_dam[i]:
+                ket_qua += text[i]
+                i += 1
+            ket_qua += "</b>"
+        else:
+            ket_qua += text[i]
+            i += 1
+    return ket_qua
+
+# Nhập đầu vào thủ công không dùng strip(), split()
+text = input("Nhap text: ")
+so_tu = int(input("so tu: "))
+ds_text = []
+for _ in range(so_tu):
+    tu = ""
+    c = input("Nhap tu: ")
+    for ch in c:
+        tu += ch  # mô phỏng strip()
+    ds_text.append(tu)
+
+kq = danh_dau(text, ds_text)
+print(kq)
