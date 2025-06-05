@@ -1,0 +1,23 @@
+text = input("Nhap text: ")
+cnt = 0
+
+# Tự xây dựng bảng tần suất
+bang_tan_suat = []
+ky_tu = []
+for c in text:
+    da_co = False
+    for i in range(len(ky_tu)):
+        if ky_tu[i] == c:
+            bang_tan_suat[i] += 1
+            da_co = True
+            break
+    if not da_co:
+        ky_tu.append(c)
+        bang_tan_suat.append(1)
+
+# Tính tổng i*(i+1)//2 cho từng tần suất
+for i in range(len(bang_tan_suat)):
+    x = bang_tan_suat[i]
+    cnt += x * (x + 1) // 2
+
+print(cnt)
