@@ -1,0 +1,26 @@
+def tan_so(s):
+    freq = {}
+    for char in s:
+        if char in freq:
+            freq[char] += 1
+        else:
+            freq[char] = 1
+    return freq
+
+def check(text, pattern):
+    m = len(pattern)
+    n = len(text)
+    cnt_pattern = tan_so(pattern)  # bảng tần số của pattern
+    kq = []
+
+    for i in range(n - m + 1):
+        position = text[i:i + m]
+        cnt_position = tan_so(position)  # bảng tần số của đoạn text đang xét
+        if cnt_position == cnt_pattern:
+            kq.append(i)
+    return kq
+
+text = input('Nhap text: ')
+pattern = input('Nhap pattern: ')
+vi_tri = check(text, pattern)
+print(' '.join(map(str, vi_tri)))
